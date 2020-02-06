@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogicalLayer.Interfaces
+namespace BLL.Interfaces
 {
-    public interface IClienteService
+    interface IFuncionarioService
     {
-        void Insert(Cliente cliente);
+        Response Insert(Funcionario cliente);
     }
 }

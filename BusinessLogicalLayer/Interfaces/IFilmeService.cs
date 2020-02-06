@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicalLayer.Interfaces
 {
-    public interface IClienteService
+    interface IFilmeService
     {
-        void Insert(Cliente cliente);
+        Response Insert(Filme filme);
+        Response Update(Filme filme);
+        Response Delete(Filme filme);
+        Response GetData(Filme filme);
     }
 }
