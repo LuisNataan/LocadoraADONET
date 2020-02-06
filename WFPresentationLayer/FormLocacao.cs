@@ -70,16 +70,16 @@ namespace WFPresentationLayer
             locacao.FoiPago = chkFoiPago.Checked;
             locacao.Funcionario = User.FuncionarioLogado;
 
-            LocacaoBLL bll = new LocacaoBLL();
-            Response response = bll.EfetuarLocacao(locacao);
-            if (response.Sucesso)
-            {
-                MessageBox.Show("Locação efetuada com sucesso!");
-            }
-            else
-            {
-                MessageBox.Show(response.GetErrorMessage());
-            }
+            //LocacaoBLL bll = new LocacaoBLL();
+            //Response response = bll.EfetuarLocacao(locacao);
+            //if (response.Sucesso)
+            //{
+            //    MessageBox.Show("Locação efetuada com sucesso!");
+            //}
+            //else
+            //{
+            //    MessageBox.Show(response.GetErrorMessage());
+            //}
         }
     }
 }

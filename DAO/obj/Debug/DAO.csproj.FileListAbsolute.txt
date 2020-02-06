@@ -1,0 +1,14 @@
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\DAO.dll.config
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\DAO.dll
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\DAO.pdb
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\Entities.dll
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\EntityFramework.dll
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\Entities.pdb
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\Entities.dll.config
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\EntityFramework.xml
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\obj\Debug\DAO.csprojAssemblyReference.cache
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\obj\Debug\DAO.csproj.CopyComplete
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\obj\Debug\DAO.dll
+C:\Users\900190\Source\Repos\LocadoraADONET\DAO\obj\Debug\DAO.pdb

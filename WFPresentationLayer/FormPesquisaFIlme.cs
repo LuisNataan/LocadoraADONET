@@ -31,7 +31,7 @@ namespace WFPresentationLayer
 
         private void FormPesquisaFIlme_Load(object sender, EventArgs e)
         {
-            this.dataGridView1.DataSource = new FilmeBLL().GetData().Data;
+            //this.dataGridView1.DataSource = new FilmeBLL().GetData().Data;
         }
     }
 }

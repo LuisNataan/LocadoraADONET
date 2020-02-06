@@ -32,7 +32,7 @@ namespace WFPresentationLayer
 
         private void FormPesquisaCliente_Load(object sender, EventArgs e)
         {
-            this.dataGridView1.DataSource = new ClienteBLL().GetData().Data;
+            //this.dataGridView1.DataSource = new ClienteBLL().GetData().Data;
         }
     }
 }

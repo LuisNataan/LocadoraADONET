@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer;
+﻿using BLL;
+using BusinessLogicalLayer;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -17,25 +18,26 @@ namespace WFPresentationLayer
         public FormLogin()
         {
             InitializeComponent();
+            new ClienteService().Insert(new Cliente());
         }
 
-        private FuncionarioBLL funcionarioBLL = new FuncionarioBLL();
+        //private FuncionarioBLL funcionarioBLL = new FuncionarioBLL();
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataResponse<Funcionario> response = funcionarioBLL.Autenticar(txtEmail.Text, txtSenha.Text);
-            if (response.Sucesso)
-            {
-                FormMenu frmMenu = new FormMenu();
-                this.Hide();
-                frmMenu.ShowDialog();
-                //Esta linha só executa quando o FormMenu for fechado
-                this.Show();
-            }
-            else
-            {
-                MessageBox.Show(response.GetErrorMessage());
-            }
+            //DataResponse<Funcionario> response = funcionarioBLL.Autenticar(txtEmail.Text, txtSenha.Text);
+            //if (response.Sucesso)
+            //{
+            //    FormMenu frmMenu = new FormMenu();
+            //    this.Hide();
+            //    frmMenu.ShowDialog();
+            //    //Esta linha só executa quando o FormMenu for fechado
+            //    this.Show();
+            //}
+            //else
+            //{
+            //    MessageBox.Show(response.GetErrorMessage());
+            //}
         }
     }
 }

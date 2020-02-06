@@ -22,17 +22,17 @@ namespace WFPresentationLayer
         }
 
         private GeneroBLL generoBLL = new GeneroBLL();
-        private FilmeBLL filmeBLL = new FilmeBLL();
+        //private FilmeBLL filmeBLL = new FilmeBLL();
         private int idFilmeASerAtualizadoExcluido = 0;
 
         private void FormFilme_Load(object sender, EventArgs e)
         {
-            cmbGeneros.DataSource = generoBLL.GetData().Data;//<- Este .Data retorna uma List<Genero>
-            cmbGeneros.DisplayMember = "Nome";
-            cmbGeneros.ValueMember = "ID";
-            cmbClassificacao.DataSource = Enum.GetValues(typeof(Classificacao));
+            //cmbGeneros.DataSource = generoBLL.GetData().Data;//<- Este .Data retorna uma List<Genero>
+            //cmbGeneros.DisplayMember = "Nome";
+            //cmbGeneros.ValueMember = "ID";
+            //cmbClassificacao.DataSource = Enum.GetValues(typeof(Classificacao));
 
-            dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
+            //dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
@@ -55,16 +55,16 @@ namespace WFPresentationLayer
             //Após preencher todas as propriedades do objeto Filme, passaremos
             //ele ao bll!
 
-            Response response = filmeBLL.Insert(filme);
-            if (response.Sucesso)
-            {
-                MessageBox.Show("Filme cadastrado com sucesso!");
-                dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
-            }
-            else
-            {
-                MessageBox.Show(response.GetErrorMessage());
-            }
+            //Response response = filmeBLL.Insert(filme);
+            //if (response.Sucesso)
+            //{
+            //    MessageBox.Show("Filme cadastrado com sucesso!");
+            //    dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
+            //}
+            //else
+            //{
+            //    MessageBox.Show(response.GetErrorMessage());
+            //}
 
         }
 
@@ -83,7 +83,7 @@ namespace WFPresentationLayer
                 if (cmbFIltro.Text == "Gênero")
                 {
                     cmbPesquisa.DataSource = null;
-                    cmbPesquisa.DataSource = generoBLL.GetData().Data;//<- Este .Data retorna uma List<Genero>
+                    //cmbPesquisa.DataSource = generoBLL.GetData().Data;//<- Este .Data retorna uma List<Genero>
                     cmbPesquisa.DisplayMember = "Nome";
                     cmbPesquisa.ValueMember = "ID";
                 }
@@ -103,50 +103,50 @@ namespace WFPresentationLayer
             dataGridView1.DataSource = null;
             DataResponse<FilmeResultSet> response = null;
 
-            if (cmbFIltro.Text == "Nome")
-            {
-                response = filmeBLL.GetFilmesByName(txtPesquisa.Text);
-            }
-            else if (cmbFIltro.Text == "Gênero")
-            {
-                response = filmeBLL.GetFilmesByGenero(((Genero)cmbPesquisa.SelectedItem).ID);
-            }
-            else
-            {
-                response = filmeBLL.GetFilmesByClassificacao(((Classificacao)cmbPesquisa.SelectedItem));
-            }
-            if (response.Sucesso)
-            {
-                if (response.Data.Count == 0)
-                {
-                    MessageBox.Show("Não foram encontrados dados!");
-                }
-                else
-                {
-                    dataGridView1.DataSource = response.Data;
-                }
-            }
-            else
-            {
-                MessageBox.Show(response.GetErrorMessage());
-            }
+            //if (cmbFIltro.Text == "Nome")
+            //{
+            //    response = filmeBLL.GetFilmesByName(txtPesquisa.Text);
+            //}
+            //else if (cmbFIltro.Text == "Gênero")
+            //{
+            //    response = filmeBLL.GetFilmesByGenero(((Genero)cmbPesquisa.SelectedItem).ID);
+            //}
+            //else
+            //{
+            //    response = filmeBLL.GetFilmesByClassificacao(((Classificacao)cmbPesquisa.SelectedItem));
+            //}
+            //if (response.Sucesso)
+            //{
+            //    if (response.Data.Count == 0)
+            //    {
+            //        MessageBox.Show("Não foram encontrados dados!");
+            //    }
+            //    else
+            //    {
+            //        dataGridView1.DataSource = response.Data;
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show(response.GetErrorMessage());
+            //}
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             FilmeResultSet result = (FilmeResultSet)dataGridView1.SelectedRows[0].DataBoundItem;
-            DataResponse<Filme> response = filmeBLL.GetByID(result.ID);
-            if (response.Sucesso)
-            {
-                Filme filme = response.Data[0];
-                idFilmeASerAtualizadoExcluido = filme.ID;
-                txtDuracao.Text = filme.Duracao.ToString();
-                txtNome.Text = filme.Nome;
-                dtpLancamento.Value = filme.DataLancamento;
+            //DataResponse<Filme> response = filmeBLL.GetByID(result.ID);
+            //if (response.Sucesso)
+            //{
+            //    Filme filme = response.Data[0];
+            //    idFilmeASerAtualizadoExcluido = filme.ID;
+            //    txtDuracao.Text = filme.Duracao.ToString();
+            //    txtNome.Text = filme.Nome;
+            //    dtpLancamento.Value = filme.DataLancamento;
 
-                cmbClassificacao.SelectedItem = filme.Classificacao;
-                cmbGeneros.SelectedValue = filme.GeneroID;
-            }   
+            //    cmbClassificacao.SelectedItem = filme.Classificacao;
+            //    cmbGeneros.SelectedValue = filme.GeneroID;
+            //}   
 
         }
 
@@ -167,30 +167,30 @@ namespace WFPresentationLayer
             //Após preencher todas as propriedades do objeto Filme, passaremos
             //ele ao bll!
 
-            Response response = filmeBLL.Update(filme);
-            if (response.Sucesso)
-            {
-                MessageBox.Show("Filme atualizado com sucesso!");
-                dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
-            }
-            else
-            {
-                MessageBox.Show(response.GetErrorMessage());
-            }
+            //Response response = filmeBLL.Update(filme);
+            //if (response.Sucesso)
+            //{
+            //    MessageBox.Show("Filme atualizado com sucesso!");
+            //    dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
+            //}
+            //else
+            //{
+            //    MessageBox.Show(response.GetErrorMessage());
+            //}
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            Response response = filmeBLL.Delete(idFilmeASerAtualizadoExcluido);
-            if (response.Sucesso)
-            {
-                MessageBox.Show("Filme excluído com sucesso!");
-                dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
-            }
-            else
-            {
-                MessageBox.Show(response.GetErrorMessage());
-            }
+            //Response response = filmeBLL.Delete(idFilmeASerAtualizadoExcluido);
+            //if (response.Sucesso)
+            //{
+            //    MessageBox.Show("Filme excluído com sucesso!");
+            //    dataGridView1.DataSource = filmeBLL.GetFilmes().Data;
+            //}
+            //else
+            //{
+            //    MessageBox.Show(response.GetErrorMessage());
+            //}
         }
     }
     //class Moeda
