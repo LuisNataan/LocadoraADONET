@@ -127,6 +127,39 @@ namespace BLL
             return response;
         }
 
+        public Response GetByID(int GeneroID)
+        {
+            DataResponse<Genero> response = new DataResponse<Genero>();
+
+            if (GeneroID <= 0)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Genero não encontrado!");
+            }
+
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                try
+                {
+                    List<Genero> genero = new List<Genero>();
+                    genero.Add(db.Generos.Find(GeneroID));
+
+                    response.Sucesso = true;
+                    response.Data = genero;
+                    return response;
+                }
+                catch(Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
+        }
+
         private Response Validate(Genero item)
         {
             Response response = new Response();
