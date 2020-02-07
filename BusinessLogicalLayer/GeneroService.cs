@@ -46,14 +46,18 @@ namespace BLL
 
         public Response Update(Genero genero)
         {
+            Response response = Validate(genero);
+            if (response.Erros.Count > 0)
+            {
+                response.Sucesso = false;
+                return response;
+            }
+
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
             {
-                Response response = new Response();
-
                 try
                 {
-                    Genero g = db.Generos.Find(genero.ID);
-                    g = genero;
+                    db.Entry<Genero>(genero).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
 
                     response.Sucesso = true;
@@ -71,11 +75,11 @@ namespace BLL
             }
         }
 
-        public Response Delete(int GeenroId)
+        public Response Delete(int GeneroId)
         {
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
             {
-                Genero genero = db.Generos.Find(GeenroId);
+                Genero genero = db.Generos.Find(GeneroId);
 
                 Response response = new Response();
 
@@ -103,6 +107,24 @@ namespace BLL
                     return response;
                 }
             }
+        }
+
+        public Response GetData(Genero genero)
+        {
+            DataResponse<Genero> response = new DataResponse<Genero>();
+
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                List<Genero> generos = db.Generos.Select(g => new Genero()
+                {
+                    ID             = g.ID,
+                    Nome           = g.Nome,
+                }).ToList();
+
+                response.Data = generos;
+            }
+
+            return response;
         }
 
         private Response Validate(Genero item)

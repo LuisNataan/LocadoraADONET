@@ -12,5 +12,6 @@ namespace BLL.Interfaces
         Response Insert(Genero genero);
         Response Update(Genero genero);
         Response Delete(int GeneroId);
+        Response GetData(Genero genero);
     }
 }

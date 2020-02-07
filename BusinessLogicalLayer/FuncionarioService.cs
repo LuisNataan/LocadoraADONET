@@ -44,6 +44,95 @@ namespace BLL
             }
         }
 
+        public Response Update(Funcionario funcionario)
+        {
+            Response response = Validate(funcionario);
+            if (response.Erros.Count > 0)
+            {
+                response.Sucesso = false;
+                return response;
+            }
+
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                try
+                {
+                    db.Entry<Funcionario>(funcionario).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
+        }
+
+        public Response Delete(int FuncionarioID)
+        {
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                Genero genero = db.Generos.Find(FuncionarioID);
+
+                Response response = new Response();
+
+                if (genero.ID <= 0)
+                {
+                    response.Sucesso = false;
+                    response.Erros.Add("Genero não encontrado!");
+                }
+
+                try
+                {
+                    db.Generos.Remove(genero);
+                    db.SaveChanges();
+
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
+        }
+
+        public Response GetData(Funcionario funcionario)
+        {
+            DataResponse<Funcionario> response = new DataResponse<Funcionario>();
+
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                List<Funcionario> funcionarios = db.Funcionarios.Select(f => new Funcionario()
+                {
+                    ID = f.ID,
+                    Nome = f.Nome,
+                    Email = f.Email,
+                    CPF = f.CPF,
+                    DataNascimento = f.DataNascimento,
+                    Telefone = f.Telefone,
+                    Senha = f.Senha,
+                    EhAtivo = f.EhAtivo,
+                }).ToList();
+
+                response.Data = funcionarios;
+            }
+
+            return response;
+        }
+
         private Response Validate(Funcionario item)
         {
             Response response = new Response();
