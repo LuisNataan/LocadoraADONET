@@ -9,6 +9,9 @@ namespace BusinessLogicalLayer.Interfaces
 {
     public interface IClienteService
     {
-        void Insert(Cliente cliente);
+        Response Insert(Cliente cliente);
+        Response Update(Cliente cliente);
+        Response Delete(Cliente cliente);
+        Response GetData(Cliente cliente);
     }
 }

@@ -8,40 +8,97 @@ using Entities.ResultSets;
 using Entities.Enums;
 using DAO;
 using BusinessLogicalLayer.Interfaces;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace BusinessLogicalLayer
 {
     public class FilmeService : IFilmeService
     {
-        public Response Delete(int id)
+
+        public Response Insert(Filme filme)
         {
-            Response response = new Response();
-            if (id <= 0)
+            Response response = Validate(filme);
+            if (response.Erros.Count > 0)
             {
-                response.Erros.Add("ID do filme não foi informado.");
-            }
-            if (response.Erros.Count != 0)
-            {
-                response.Sucesso = false;
+                response.Sucesso = true;
                 return response;
             }
-            return filmeDAL.Delete(id);
-        }
-
-        public DataResponse<Filme> GetByID(int id)
-        {
-            DataResponse<Filme> response = new DataResponse<Filme>();
 
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
-            {
-                List<Filme> filmes = db.Filmes.Find(id);
-                response.Data = filmes;
-            }
+                try
+                {
+                    db.Filmes.Add(filme);
+                    db.SaveChanges();
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
 
-            return response;
+                    response.Erros.Add("Erro no banco de dados, contate o Administrador.");
+                    File.WriteAllText("log.txt", ex.Message);
+                    return response;
+                }
+
         }
 
-        public DataResponse<Filme> GetData()
+        public Response Update(Filme filme)
+        {
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext()) 
+            {
+                Response response = new Response();
+                try
+                {
+                    Filme f = db.Filmes.Find(filme.ID);
+                    f = filme;
+                    db.SaveChanges();
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+                    response.Erros.Add("Erro no banco de dados, contate o Administrado.");
+                    File.WriteAllText("log.txt", ex.Message);
+                    return response;
+                }
+            }
+        }
+
+        public Response Delete(Filme filmeID)
+        {
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext()) 
+            {
+                Filme filme = db.Filmes.Find(filmeID);
+
+                Response response = new Response();
+
+                if (filme.ID <= 0)
+                {
+                    response.Sucesso = false;
+                    response.Erros.Add("Filme não encontrado!");
+                }
+                try
+                {
+                    db.Filmes.Remove(filme);
+                    db.SaveChanges();
+
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+                    response.Erros.Add("Erro no banco de dados, contate o administrador.");
+                    File.WriteAllText("log.txt", ex.Message);
+                    return response;
+                }
+            }
+        }
+
+        public Response GetData(Filme filme)
         {
             DataResponse<Filme> response = new DataResponse<Filme>();
 
@@ -63,83 +120,24 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        public DataResponse<FilmeResultSet> GetFilmes()
+        private Response Validate(Filme item)
         {
-            public DataResponse<FilmeResultSet> GetFilmesByClassificacao(Classificacao classificacao)
+            Response response = new Response();
+            if (string.IsNullOrWhiteSpace(item.Nome))
             {
-                return filmeDAL.GetFilmesByClassificacao(classificacao);
+                response.Erros.Add("O nome do filme deve ser informado.");
             }
-
-            public DataResponse<FilmeResultSet> GetFilmesByGenero(int genero)
+            else
             {
-                if (genero <= 0)
+                item.Nome = item.Nome.Trim();
+
+                item.Nome = Regex.Replace(item.Nome, @"\s+", " ");
+                if (item.Nome.Length < 2 || item.Nome.Length > 50)
                 {
-                    DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
-                    response.Sucesso = false;
-                    response.Erros.Add("Gênero deve ser informado.");
-                    return response;
+                    response.Erros.Add("O nome do filme deve conter entre 2 e 50 caracteres");
                 }
-                return filmeDAL.GetFilmesByGenero(genero);
             }
-
-            public DataResponse<FilmeResultSet> GetFilmesByName(string nome)
-            {
-                if (string.IsNullOrWhiteSpace(nome))
-                {
-                    DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
-                    response.Sucesso = false;
-                    response.Erros.Add("Nome deve ser informado.");
-                    return response;
-                }
-                nome = nome.Trim();
-                return filmeDAL.GetFilmesByName(nome);
-            }
-
-            public Response Insert(Filme item)
-            {
-                Response response = Validate(item);
-                //TODO: Verificar a existência desse gênero na base de dados
-                //generoBLL.LerID(item.GeneroID);
-
-                //Verifica se tem erros!
-                if (response.Erros.Count != 0)
-                {
-                    response.Sucesso = false;
-                    return response;
-                }
-                return filmeDAL.Insert(item);
-            }
-            public Response Update(Filme item)
-            {
-                Response response = Validate(item);
-                //TODO: Verificar a existência desse gênero na base de dados
-                //generoBLL.LerID(item.GeneroID);
-                //Verifica se tem erros!
-                if (response.Erros.Count != 0)
-                {
-                    response.Sucesso = false;
-                    return response;
-                }
-                return filmeDAL.Update(item);
-            }
-
-            private Response Validate(Filme item)
-            {
-                Response response = new Response();
-
-                if (item.Duracao <= 10)
-                {
-                    response.Erros.Add("Duração não pode ser menor que 10 minutos.");
-                }
-
-                if (item.DataLancamento == DateTime.MinValue
-                                        ||
-                    item.DataLancamento > DateTime.Now)
-                {
-                    response.Erros.Add("Data inválida.");
-                }
-
-                return response;
-            }
+            return response;
         }
     }
+}
