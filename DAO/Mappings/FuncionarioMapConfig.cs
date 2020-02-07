@@ -19,7 +19,7 @@ namespace DAO.Mappings
             this.Property(fun => fun.DataNascimento).HasColumnType("Date").IsRequired();
             this.Property(fun => fun.Email).HasMaxLength(100);
             this.Property(fun => fun.Telefone).IsFixedLength().HasMaxLength(15);
-
+            this.Property(fun => fun.Senha).HasMaxLength(50);
         }
     }
 }
