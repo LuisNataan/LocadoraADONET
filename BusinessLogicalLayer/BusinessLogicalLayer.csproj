@@ -60,7 +60,8 @@
     <Compile Include="Interfaces\IFilmeService.cs" />
     <Compile Include="Interfaces\IFuncionarioService.cs" />
     <Compile Include="Interfaces\IGeneroService.cs" />
-    <Compile Include="LocacaoBLL.cs" />
+    <Compile Include="Interfaces\ILocacaoService.cs" />
+    <Compile Include="LocacaoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\HashUtils.cs" />
     <Compile Include="Security\SenhaValidator.cs" />
