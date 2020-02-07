@@ -9,6 +9,9 @@ namespace BLL.Interfaces
 {
     interface IFuncionarioService
     {
-        Response Insert(Funcionario cliente);
+        Response Insert(Funcionario funcionario);
+        Response Update(Funcionario funcionario);
+        Response Delete(int FuncionarioID);
+        Response GetData(Funcionario funcionario);
     }
 }
