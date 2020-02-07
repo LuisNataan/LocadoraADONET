@@ -27,6 +27,7 @@ namespace DAO
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
 

@@ -21,7 +21,7 @@ namespace Entities
         public DateTime DataLocacao { get; set; }
         public DateTime DataPrevistaDevolucao { get; set; }
         public DateTime? DataDevolucao { get; set; }
-        public List<Filme> Filmes { get; set; }
+        public virtual ICollection<Filme> Filmes { get; set; }
         public bool FoiPago { get; set; }
 
        

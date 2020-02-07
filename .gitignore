@@ -4,5 +4,6 @@
 
 *.lock
 *.ide
-*.ide-wal
 *.ide-shm
+*.ide-wal
+*.suo

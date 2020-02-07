@@ -4,6 +4,7 @@ using DAO;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,24 @@ namespace BLL
 
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
             {
-                db.Funcionarios.Add(funcionario);
-                db.SaveChanges();
-            }
+                try
+                {
+                    db.Funcionarios.Add(funcionario);
+                    db.SaveChanges();
 
-            response.Sucesso = true;
-            return response;
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
         }
 
         private Response Validate(Funcionario item)

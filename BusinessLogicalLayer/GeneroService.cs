@@ -3,6 +3,7 @@ using DAO;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,17 +24,51 @@ namespace BLL
 
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
             {
-                db.Generos.Add(genero);
-                db.SaveChanges();
-            }
+                try
+                {
+                    db.Generos.Add(genero);
+                    db.SaveChanges();
 
-            response.Sucesso = true;
-            return response;
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
         }
 
         public Response Update(Genero genero)
         {
-            throw new NotImplementedException();
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                Response response = new Response();
+
+                try
+                {
+                    Genero g = db.Generos.Find(genero.ID);
+                    g = genero;
+                    db.SaveChanges();
+
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
         }
 
         public Response Delete(int GeenroId)
@@ -44,18 +79,29 @@ namespace BLL
 
                 Response response = new Response();
 
-                if (genero.ID > 0)
-                {
-                    response.Sucesso = true;
-                    db.Generos.Remove(genero);
-                    db.SaveChanges();
-                }
-                else
+                if (genero.ID <= 0)
                 {
                     response.Sucesso = false;
                     response.Erros.Add("Genero não encontrado!");
                 }
-                return response;
+
+                try
+                {
+                    db.Generos.Remove(genero);
+                    db.SaveChanges();
+
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
             }
         }
 

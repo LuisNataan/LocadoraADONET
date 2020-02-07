@@ -17,6 +17,8 @@ namespace Entities
         public int GeneroID { get; set; }
         public virtual Genero Genero { get; set; }
 
+        public virtual ICollection<Locacao> Locacoes { get; set; }
+
         /// <summary>
         /// Calcula a devolução do filme
         /// </summary>
