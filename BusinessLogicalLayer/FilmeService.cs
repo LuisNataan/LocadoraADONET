@@ -119,6 +119,54 @@ namespace BusinessLogicalLayer
             return response;
         }
 
+        public Response GetByName(Filme filmesName)
+        {
+            DataResponse<Filme> response = new DataResponse<Filme>();
+
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                try
+                {
+                    List<Filme> filmes = new List<Filme>();
+                    filmes.Add(db.Filmes.Find(filmesName.Nome));
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+                    response.Erros.Add("Erro no banco de dados, contate o administrador.");
+                    File.WriteAllText("log.txt", ex.Message);
+                    return response;
+                }
+
+            }
+
+        }
+
+        public Response GetByID(Filme filmeID)
+        {
+            DataResponse<Filme> response = new DataResponse<Filme>();
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                try
+                {
+                    List<Filme> filmes = new List<Filme>();
+                    filmes.Add(db.Filmes.Find(filmeID.ID));
+                    response.Sucesso = true;
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+                    response.Erros.Add("Erro no banco de dados, contate o administrador.");
+                    File.WriteAllText("log.txt", ex.Message);
+                    return response;
+                }
+
+            }
+        }
+
         private Response Validate(Filme item)
         {
             Response response = new Response();
