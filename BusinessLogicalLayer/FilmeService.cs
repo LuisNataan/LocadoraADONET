@@ -41,7 +41,6 @@ namespace BusinessLogicalLayer
                     File.WriteAllText("log.txt", ex.Message);
                     return response;
                 }
-
         }
 
         public Response Update(Filme filme)

@@ -112,6 +112,40 @@ namespace BLL
             }
             return response;
         }
+
+        public Response GetByID(int ClienteID)
+        {
+            DataResponse<Cliente> response = new DataResponse<Cliente>();
+
+            if (ClienteID <= 0)
+            {
+                response.Sucesso = false;
+                response.Erros.Add("Funcionario não encontrado!");
+            }
+
+            using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
+            {
+                try
+                {
+                    List<Cliente> cliente = new List<Cliente>();
+                    cliente.Add(db.Clientes.Find(ClienteID));
+
+                    response.Sucesso = true;
+                    response.Data = cliente;
+
+                    return response;
+                }
+                catch (Exception ex)
+                {
+                    response.Sucesso = false;
+
+                    response.Erros.Add("Erro no banco de dados, contate o administrador!");
+                    File.WriteAllText("log.txt", ex.Message);
+
+                    return response;
+                }
+            }
+        }
         private Response Validate(Filme item)
         {
             Response response = new Response();
