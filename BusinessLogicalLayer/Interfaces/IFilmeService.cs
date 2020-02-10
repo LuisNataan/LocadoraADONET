@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.ResultSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BusinessLogicalLayer.Interfaces
     {
         Response Insert(Filme filme);
         Response Update(Filme filme);
-        Response Delete(Filme filme);
-        Response GetData(Filme filme);
+        Response Delete(int filme);
+        DataResponse<FilmeResultSet> GetData();
     }
 }

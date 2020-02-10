@@ -66,7 +66,7 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public Response Delete(Filme filmeID)
+        public Response Delete(int filmeID)
         {
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext()) 
             {
@@ -97,20 +97,18 @@ namespace BusinessLogicalLayer
             }
         }
 
-        public Response GetData(Filme filme)
+        public DataResponse<FilmeResultSet> GetData()
         {
-            DataResponse<Filme> response = new DataResponse<Filme>();
+            DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
 
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
             {
-                List<Filme> filmes = db.Filmes.Select(f => new Filme()
+                List<FilmeResultSet> filmes = db.Filmes.Select(f => new FilmeResultSet()
                 {
                     ID = f.ID,
                     Nome = f.Nome,
                     Classificacao = f.Classificacao,
-                    DataLancamento = f.DataLancamento,
-                    Duracao = f.Duracao,
-                    Genero = f.Genero,
+                    Genero = f.Genero.Nome,
                 }).ToList();
 
                 response.Data = filmes;
@@ -119,16 +117,16 @@ namespace BusinessLogicalLayer
             return response;
         }
 
-        public Response GetByName(Filme filmesName)
+        public DataResponse<FilmeResultSet> GetByName(string filmesName)
         {
-            DataResponse<Filme> response = new DataResponse<Filme>();
+            DataResponse<FilmeResultSet> response = new DataResponse<FilmeResultSet>();
 
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())
             {
                 try
                 {
                     List<Filme> filmes = new List<Filme>();
-                    filmes.Add(db.Filmes.Find(filmesName.Nome));
+                    filmes.Add(db.Filmes.Find(filmesName));
                     response.Sucesso = true;
                     return response;
                 }
@@ -144,7 +142,7 @@ namespace BusinessLogicalLayer
 
         }
 
-        public Response GetByID(Filme filmeID)
+        public DataResponse<Filme> GetByID(int filmeID)
         {
             DataResponse<Filme> response = new DataResponse<Filme>();
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext())

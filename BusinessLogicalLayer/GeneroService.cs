@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class GeneroService : IGeneroService
+    public class GeneroService : IGeneroService
     {
         public Response Insert(Genero genero)
         {
@@ -109,7 +109,7 @@ namespace BLL
             }
         }
 
-        public Response GetData(Genero genero)
+        public DataResponse<Genero> GetData()
         {
             DataResponse<Genero> response = new DataResponse<Genero>();
 
@@ -127,7 +127,7 @@ namespace BLL
             return response;
         }
 
-        public Response GetByID(int GeneroID)
+        public DataResponse<Genero> GetByID(int GeneroID)
         {
             DataResponse<Genero> response = new DataResponse<Genero>();
 

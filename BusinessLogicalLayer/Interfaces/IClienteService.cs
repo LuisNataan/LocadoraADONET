@@ -12,6 +12,6 @@ namespace BusinessLogicalLayer.Interfaces
         Response Insert(Cliente cliente);
         Response Update(Cliente cliente);
         Response Delete(Cliente cliente);
-        Response GetData(Cliente cliente);
+        DataResponse<Cliente> GetData();
     }
 }

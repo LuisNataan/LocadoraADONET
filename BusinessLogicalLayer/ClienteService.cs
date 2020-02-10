@@ -94,7 +94,7 @@ namespace BLL
             }
         }
 
-        public Response GetData(Cliente cliente)
+        public DataResponse<Cliente> GetData()
         {
             DataResponse<Cliente> response = new DataResponse<Cliente>();
             using (XXXLocadoraDbContext db = new XXXLocadoraDbContext()) 
@@ -113,7 +113,7 @@ namespace BLL
             return response;
         }
 
-        public Response GetByID(int ClienteID)
+        public DataResponse<Cliente> GetByID(int ClienteID)
         {
             DataResponse<Cliente> response = new DataResponse<Cliente>();
 

@@ -175,9 +175,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogicalLayer\BusinessLogicalLayer.csproj">
+    <ProjectReference Include="..\BusinessLogicalLayer\BLL.csproj">
       <Project>{5534B0C1-7F3F-4EF2-9BA9-26232AD54557}</Project>
-      <Name>BusinessLogicalLayer</Name>
+      <Name>BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{890F031F-0649-4E7F-BDD3-351B2FF960E1}</Project>

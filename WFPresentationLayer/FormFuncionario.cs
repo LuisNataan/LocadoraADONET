@@ -1,4 +1,5 @@
-﻿using BusinessLogicalLayer;
+﻿using BLL;
+using BusinessLogicalLayer;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace WFPresentationLayer
 {
     public partial class FormFuncionario : Form
     {
+
+        FuncionarioService funcService = new FuncionarioService();
         public FormFuncionario()
         {
             InitializeComponent();
-            //dataGridView1.DataSource = bll.GetData().Data;
+            dataGridView1.DataSource = funcService.GetData().Data;
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
         }
         int idFuncionarioASerAtualizadoExcluido = 0;

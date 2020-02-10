@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class FuncionarioService : IFuncionarioService
+    public class FuncionarioService : IFuncionarioService
     {
         public Response Insert(Funcionario funcionario)
         {
@@ -109,7 +109,7 @@ namespace BLL
             }
         }
 
-        public Response GetData(Funcionario funcionario)
+        public DataResponse<Funcionario> GetData()
         {
             DataResponse<Funcionario> response = new DataResponse<Funcionario>();
 
