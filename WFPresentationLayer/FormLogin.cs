@@ -18,13 +18,33 @@ namespace WFPresentationLayer
         public FormLogin()
         {
             InitializeComponent();
-            new ClienteService().Insert(new Cliente());
+
+            new ClienteService().Insert(new Cliente()
+            {
+                Nome = "Danizinho Bernart",
+                EhAtivo = true,
+                CPF = "901.917.069-49",
+                DataNascimento = DateTime.Now.AddYears(-25),
+                Email = "matfts2fsd@gmail.com"
+            });
+
         }
 
         //private FuncionarioBLL funcionarioBLL = new FuncionarioBLL();
 
         private void button1_Click(object sender, EventArgs e)
         {
+            new ClienteService().Insert(new Cliente()
+            {
+                Nome = "Danizinho Bernart",
+                EhAtivo = true,
+                CPF = "901.917.069-49",
+                DataNascimento = DateTime.Now.AddYears(-25),
+                Email = "matfts2fsd@gmail.com"
+            });
+
+            new ClienteService().Insert(new Cliente());
+
             //DataResponse<Funcionario> response = funcionarioBLL.Autenticar(txtEmail.Text, txtSenha.Text);
             //if (response.Sucesso)
             //{

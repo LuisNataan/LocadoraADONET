@@ -16,9 +16,9 @@ namespace DAO.Mappings
             this.ToTable("FILMES");
             this.Property(f => f.Nome).HasMaxLength(50);
             this.Property(f => f.DataLancamento).HasColumnType("Date").IsRequired();
-        //    this.HasMany(f => f.Locacoes).WithMany(l => l.Filmes).Map(m =>
-        //     m.MapLeftKey("LocacaoID").MapRightKey("FilmeID").ToTable("LOCACAO_FILMES2ETEAMO");
-        //
+            this.HasMany(f => f.Locacoes).WithMany(l => l.Filmes).Map(m =>
+             m.MapLeftKey("LocacaoID").MapRightKey("FilmeID").ToTable("LOCACAO_FILME"));
+
         }
     }
 }

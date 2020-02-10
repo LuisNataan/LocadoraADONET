@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\GeneroMapConfig.cs" />
+    <Compile Include="Mappings\LocacaoMapConfig.cs" />
     <Compile Include="Mappings\FuncionarioMapConfig.cs" />
     <Compile Include="Mappings\FilmeMapConfig.cs" />
     <Compile Include="Mappings\ClienteMapConfig.cs" />

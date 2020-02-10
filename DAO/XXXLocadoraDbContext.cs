@@ -13,7 +13,7 @@ namespace DAO
 {
     public class XXXLocadoraDbContext : DbContext 
     {
-        public XXXLocadoraDbContext() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\900190\Desktop\Base\XXXLocadoraDB.mdf;Integrated Security=True;Connect Timeout=30")
+        public XXXLocadoraDbContext() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\900191\Desktop\Bases\LocadoraXXX2.mdf;Integrated Security=True;Connect Timeout=30")
         {
             
         }
@@ -28,6 +28,8 @@ namespace DAO
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
 
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
 

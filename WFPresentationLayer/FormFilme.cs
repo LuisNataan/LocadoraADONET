@@ -21,7 +21,7 @@ namespace WFPresentationLayer
             InitializeComponent();
         }
 
-        private GeneroBLL generoBLL = new GeneroBLL();
+        //private GeneroBLL generoBLL = new GeneroBLL();
         //private FilmeBLL filmeBLL = new FilmeBLL();
         private int idFilmeASerAtualizadoExcluido = 0;
 

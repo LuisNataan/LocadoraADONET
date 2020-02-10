@@ -13,7 +13,7 @@ namespace DAO.Mappings
         public FuncionarioMapConfig()
         {
             //Definimos o nome da tabela que está vinculada a entidade escrita lá em cima (Cliente)
-            this.ToTable("CLIENTES");
+            this.ToTable("FUNCIONARIOS");
             this.Property(fun => fun.Nome).HasMaxLength(50);
             this.Property(fun => fun.CPF).IsFixedLength().HasMaxLength(14);
             this.Property(fun => fun.DataNascimento).HasColumnType("Date").IsRequired();

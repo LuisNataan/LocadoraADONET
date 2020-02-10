@@ -20,7 +20,7 @@ namespace WFPresentationLayer
             //dataGridView1.DataSource = bll.GetData().Data;
             dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
         }
-        GeneroBLL bll = new GeneroBLL();
+        //GeneroBLL bll = new GeneroBLL();
         int idGeneroASerAtualizadoExcluido = 0;
 
         private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -42,7 +42,7 @@ namespace WFPresentationLayer
             Genero genero = new Genero();
             genero.Nome = txtGenero.Text;
 
-            bll = new GeneroBLL();
+            //bll = new GeneroBLL();
             //Invoca a sequência de operações de inserção (bll depois dal)
             //e recebe a resposta destas operaçoes!
             //Response response = bll.Insert(genero);
